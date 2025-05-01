@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Revealed</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/revealedcap.png" />
+    <!-- Core theme CSS -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        .video-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+
+        .video-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .video-card:hover .play-button {
+            opacity: 1;
+        }
+
+        .card-title {
+            margin-top: 10px;
+        }
+
+        .card-body {
+            background: transparent;
+        }
+
+        .card.bg-dark {
+            background-color: #1a1a1a !important;
+            border: none;
+        }
+
+        .view-more-btn {
+            display: inline-block;
+            padding: 10px 30px;
+            color: #f8f9fa;
+            background-color: #000;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .view-more-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            color: #ffffff;
+        }
+
+        .intro-box {
+    background: url('assets/torn-bg.png') center center no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    padding: 30px;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+        .intro-box h1 {
+            font-size: 2rem;
+            color: #000000;
+            font-weight: bold;
+        }
+        .intro-box p {
+            font-size: 1rem;
+            color: #000000;
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            color: rgb(0, 0, 0);
+            animation: glitch 2s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            color: #000000;
+            clip: rect(0, 900px, 0, 0);
+        }
+
+        .glitch::before {
+            animation: glitchTop 1s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            animation: glitchBottom 1s infinite linear alternate-reverse;
+        }
+
+
+        @keyframes glitchTop {
+            0% {
+                clip: rect(0, 9999px, 0, 0);
+            }
+            10% {
+                clip: rect(0, 9999px, 10px, 0);
+                transform: translate(-2px, -2px);
+            }
+            20% {
+                clip: rect(0, 9999px, 20px, 0);
+                transform: translate(2px, 2px);
+            }
+            30% {
+                clip: rect(0, 9999px, 10px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(0, 9999px, 0, 0);
+                transform: none;
+            }
+        }
+
+        @keyframes glitchBottom {
+            0% {
+                clip: rect(0, 9999px, 0, 0);
+            }
+            10% {
+                clip: rect(10px, 9999px, 9999px, 0);
+                transform: translate(2px, 2px);
+            }
+            20% {
+                clip: rect(20px, 9999px, 9999px, 0);
+                transform: translate(-2px, -2px);
+            }
+            30% {
+                clip: rect(10px, 9999px, 9999px, 0);
+                transform: translate(1px, -1px);
+            }
+            100% {
+                clip: rect(0, 9999px, 0, 0);
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Responsive navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets/revealedcap.png" alt="Logo" style="height:60px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Investigations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex ms-3" role="search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-white text-dark border-0" 
+                style="border-top-left-radius: 50px; border-bottom-left-radius: 50px;" 
+                placeholder="Search..." aria-label="Search">
+              <button class="btn btn-dark border-0" 
+                style="border-top-right-radius: 50px; border-bottom-right-radius: 50px; padding: 8px 16px;" 
+                type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+          
+      </div>
+    </div>
+  </nav>
+
+    <!-- About Section -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 intro-box text-center">
+                <h1 class="glitch" data-text="Uncover the Truth">Uncover the Truth</h1>
+                <p class="mt-3">
+                    <strong>Revealed</strong> Revealed is a platform that dissects the truth behind digital culture. We investigate the contradictions, double standards, and performance-driven behavior shaping the internet today.
+                </p>
+                <p>
+                    From subtle algorithmic nudges to loud public hypocrisy, we pull back the curtain on the systems and users influencing the conversations you see online. No speculation. Just a clear look at how the internet really works — and how people use it.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Page content -->
+<div class="container mt-5">
+
+    <!-- Replacing Section title with image -->
+    <div class="text-center mb-4">
+        <img src="assets/tst.png" alt="Recent Releases" style="max-width: 25%; height: auto;">
+    </div>
+
+    <!-- Scrollable Video thumbnails -->
+    <div class="d-flex overflow-auto gap-3 px-2">
+        <div class="flex-shrink-0" style="width: 300px;">
+            <a href="post.html" target="_blank" class="text-decoration-none text-light">
+                <div class="card bg-dark border-0 video-card">
+                    <img src="assets/tnr.png" alt="Video 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Is Everyone A Hypocrite?</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="flex-shrink-0" style="width: 300px;">
+            <a href="https://www.youtube.com/watch?v=VIDEO2" target="_blank" class="text-decoration-none text-light">
+                <div class="card bg-dark border-0 video-card">
+                    <img src="assets/tntk.png" alt="Video 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Downfall of TikTok</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="flex-shrink-0" style="width: 300px;">
+            <a href="https://www.youtube.com/watch?v=VIDEO3" target="_blank" class="text-decoration-none text-light">
+                <div class="card bg-dark border-0 video-card">
+                    <img src="assets/tnls.png" alt="Video 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Exploitation of Video Games</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="flex-shrink-0" style="width: 300px;">
+            <a href="https://www.youtube.com/watch?v=VIDEO4" target="_blank" class="text-decoration-none text-light">
+                <div class="card bg-dark border-0 video-card">
+                    <img src="assets/tnf.png" alt="Video 4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Is Facebook Watching you?</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="flex-shrink-0" style="width: 300px;">
+            <a href="https://www.youtube.com/watch?v=VIDEO5" target="_blank" class="text-decoration-none text-light">
+                <div class="card bg-dark border-0 video-card">
+                    <img src="assets/tnpd.png" alt="Video 5">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Privacy is Dead</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="bg text-light py-4 mt-5">
+    <div class="container text-center">
+      <p class="mb-2">© 2025 Revealed. All Rights Reserved.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#" class="text-light text-decoration-none"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-light text-decoration-none"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-light text-decoration-none"><i class="bi bi-youtube"></i></a>
+        <a href="#" class="text-light text-decoration-none"><i class="bi bi-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
